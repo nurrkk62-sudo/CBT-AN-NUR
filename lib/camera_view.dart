@@ -3,15 +3,23 @@ import 'package:flutter/material.dart';
 
 class CameraView extends StatelessWidget {
   final CameraController cam;
+  final double height;
+  final double width;
 
-  const CameraView({super.key, required this.cam});
+  const CameraView({
+    super.key,
+    required this.cam,
+    this.height = 180,
+    this.width = double.infinity,
+  });
 
   @override
   Widget build(BuildContext context) {
     if (!cam.value.isInitialized) {
-      return const SizedBox(
-        height: 180,
-        child: Center(child: CircularProgressIndicator()),
+      return SizedBox(
+        height: height,
+        width: width,
+        child: const Center(child: CircularProgressIndicator()),
       );
     }
 
@@ -19,8 +27,8 @@ class CameraView extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: SizedBox(
-          height: 180,
-          width: double.infinity,
+          height: height,
+          width: width,
           child: CameraPreview(cam),
         ),
       ),

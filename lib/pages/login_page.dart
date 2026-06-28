@@ -110,11 +110,12 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    const primary = Color(0xFFE7A9C2);
-    const primaryDark = Color(0xFFD98EAF);
-    const textDark = Color(0xFF6B4A5C);
-    const textSoft = Color(0xFF9D7B8C);
-    const borderColor = Color(0xFFF1D7E2);
+    const primary = Color(0xFF0D5C34);
+    const primaryDark = Color(0xFF084024);
+    const primaryLight = Color(0xFFE8F5E9);
+    const textDark = Color(0xFF1E2D24);
+    const textSoft = Color(0xFF556B5D);
+    const borderColor = Color(0xFFE2E8E4);
 
     return Scaffold(
       body: Stack(
@@ -132,8 +133,8 @@ class _LoginPageState extends State<LoginPage> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.white.withOpacity(0.55),
-                    const Color(0xFFFFF6FA).withOpacity(0.75),
+                    Colors.white.withOpacity(0.60),
+                    const Color(0xFFEDF4F0).withOpacity(0.85),
                   ],
                 ),
               ),
@@ -146,12 +147,12 @@ class _LoginPageState extends State<LoginPage> {
                 width: 380,
                 padding: const EdgeInsets.all(26),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.88),
+                  color: Colors.white.withOpacity(0.92),
                   borderRadius: BorderRadius.circular(28),
                   border: Border.all(color: borderColor),
                   boxShadow: const [
                     BoxShadow(
-                      color: Color(0x1AD98EAF),
+                      color: Color(0x1A0D5C34),
                       blurRadius: 22,
                       offset: Offset(0, 10),
                     ),
@@ -163,13 +164,13 @@ class _LoginPageState extends State<LoginPage> {
                     Container(
                       padding: const EdgeInsets.all(18),
                       decoration: const BoxDecoration(
-                        color: Color(0xFFFCEAF2),
+                        color: primaryLight,
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
                         Icons.lock_outline_rounded,
                         size: 56,
-                        color: primaryDark,
+                        color: primary,
                       ),
                     ),
                     const SizedBox(height: 18),
@@ -210,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
                           borderSide: const BorderSide(
-                            color: primaryDark,
+                            color: primary,
                             width: 1.5,
                           ),
                         ),
@@ -236,7 +237,7 @@ class _LoginPageState extends State<LoginPage> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
                           borderSide: const BorderSide(
-                            color: primaryDark,
+                            color: primary,
                             width: 1.5,
                           ),
                         ),
@@ -257,7 +258,7 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(18),
                           boxShadow: const [
                             BoxShadow(
-                              color: Color(0x22D98EAF),
+                              color: Color(0x220D5C34),
                               blurRadius: 14,
                               offset: Offset(0, 8),
                             ),

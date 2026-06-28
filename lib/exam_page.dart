@@ -289,6 +289,14 @@ late int sisaDetik;
     }
   }
 
+  void jumpToSoal(int index) {
+    if (index >= 0 && index < soalList.length) {
+      setState(() {
+        currentIndex = index;
+      });
+    }
+  }
+
   String convertJawaban(int index) {
     switch (index) {
       case 0:
@@ -728,6 +736,7 @@ void didChangeAppLifecycleState(AppLifecycleState state) async {
     cam: _cam!,
     pelanggaran: pelanggaran,
     jawaban: jawabanList[currentIndex],
+    jawabanList: jawabanList,
     soalList: soalList,
     currentIndex: currentIndex,
     totalSoal: soalList.length,
@@ -747,6 +756,10 @@ void didChangeAppLifecycleState(AppLifecycleState state) async {
     onPrev: () {
       if (_hasFinished) return;
       prevSoal();
+    },
+    onJumpToQuestion: (idx) {
+      if (_hasFinished) return;
+      jumpToSoal(idx);
     },
     onFinish: () => _finish(),
   ),

@@ -15,11 +15,19 @@ class SelesaiPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const primary = Color(0xFF0D5C34);
+    const primaryDark = Color(0xFF084024);
+    const primaryLight = Color(0xFFE8F5E9);
+    const textDark = Color(0xFF1E2D24);
+    const textSoft = Color(0xFF556B5D);
+    const borderColor = Color(0xFFE2E8E4);
+
     return Scaffold(
-      backgroundColor: const Color(0xFFFDF7FB),
+      backgroundColor: const Color(0xFFF8F9FA),
       body: SafeArea(
         child: Stack(
           children: [
+            // Decorative background bubbles
             Positioned(
               top: -40,
               right: -30,
@@ -27,7 +35,7 @@ class SelesaiPage extends StatelessWidget {
                 width: 170,
                 height: 170,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFDFF0).withOpacity(0.55),
+                  color: primaryLight.withOpacity(0.6),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -39,7 +47,7 @@ class SelesaiPage extends StatelessWidget {
                 width: 190,
                 height: 190,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE8F7EE).withOpacity(0.7),
+                  color: const Color(0xFFE0F2F1).withOpacity(0.5),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -55,14 +63,14 @@ class SelesaiPage extends StatelessWidget {
                       vertical: 28,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.94),
+                      color: Colors.white.withOpacity(0.96),
                       borderRadius: BorderRadius.circular(32),
                       border: Border.all(
-                        color: const Color(0xFFF4DCE8),
+                        color: borderColor,
                       ),
                       boxShadow: const [
                         BoxShadow(
-                          color: Color(0x1ACFA6BA),
+                          color: Color(0x0C0D5C34),
                           blurRadius: 30,
                           offset: Offset(0, 14),
                         ),
@@ -71,17 +79,18 @@ class SelesaiPage extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        // Checkmark Success Badge
                         Container(
                           width: 108,
                           height: 108,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                const Color(0xFFE5F8EC),
-                                const Color(0xFFD2F1DD),
+                                Color(0xFFE5F8EC),
+                                Color(0xFFD2F1DD),
                               ],
                             ),
                             boxShadow: [
@@ -105,7 +114,7 @@ class SelesaiPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.w800,
-                            color: Color(0xFF6E5162),
+                            color: textDark,
                             letterSpacing: 0.2,
                           ),
                         ),
@@ -116,18 +125,19 @@ class SelesaiPage extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 15,
                             height: 1.65,
-                            color: Color(0xFF8F7382),
+                            color: textSoft,
                           ),
                         ),
                         const SizedBox(height: 24),
+                        // Results Card
                         Container(
                           width: double.infinity,
                           padding: const EdgeInsets.all(18),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFFFFAFD),
+                            color: const Color(0xFFFBFDFB),
                             borderRadius: BorderRadius.circular(24),
                             border: Border.all(
-                              color: const Color(0xFFF2DCE7),
+                              color: borderColor,
                             ),
                           ),
                           child: Column(
@@ -145,6 +155,7 @@ class SelesaiPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 24),
+                        // Inspirational Quote Panel
                         Container(
                           width: double.infinity,
                           padding: const EdgeInsets.symmetric(
@@ -152,7 +163,7 @@ class SelesaiPage extends StatelessWidget {
                             vertical: 14,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFF7F2F7),
+                            color: const Color(0xFFF0F4F2),
                             borderRadius: BorderRadius.circular(18),
                           ),
                           child: const Text(
@@ -161,11 +172,12 @@ class SelesaiPage extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14,
                               height: 1.6,
-                              color: Color(0xFF7E6674),
+                              color: Color(0xFF3E5044),
                             ),
                           ),
                         ),
                         const SizedBox(height: 26),
+                        // Close Button
                         SizedBox(
                           width: double.infinity,
                           height: 54,
@@ -173,8 +185,8 @@ class SelesaiPage extends StatelessWidget {
                             decoration: BoxDecoration(
                               gradient: const LinearGradient(
                                 colors: [
-                                  Color(0xFFEAB6CF),
-                                  Color(0xFFD9A7C2),
+                                  primary,
+                                  primaryDark,
                                 ],
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
@@ -182,7 +194,7 @@ class SelesaiPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(18),
                               boxShadow: const [
                                 BoxShadow(
-                                  color: Color(0x22D9A7C2),
+                                  color: Color(0x220D5C34),
                                   blurRadius: 16,
                                   offset: Offset(0, 8),
                                 ),
@@ -223,17 +235,19 @@ class SelesaiPage extends StatelessWidget {
   }
 
   Widget _infoRow(String label, String value, {bool highlight = false}) {
+    const primary = Color(0xFF0D5C34);
+    const primaryLight = Color(0xFFE8F5E9);
+    const textDark = Color(0xFF1E2D24);
+    const textSoft = Color(0xFF556B5D);
+    const borderColor = Color(0xFFE2E8E4);
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
       decoration: BoxDecoration(
-        color: highlight
-            ? const Color(0xFFFFF0F7)
-            : const Color(0xFFFFFFFF),
+        color: highlight ? primaryLight : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: highlight
-              ? const Color(0xFFE9BED3)
-              : const Color(0xFFF1E2EA),
+          color: highlight ? const Color(0xFFC8E6C9) : borderColor,
         ),
       ),
       child: Row(
@@ -243,7 +257,7 @@ class SelesaiPage extends StatelessWidget {
               label,
               style: const TextStyle(
                 fontSize: 14,
-                color: Color(0xFF8F7382),
+                color: textSoft,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -252,7 +266,7 @@ class SelesaiPage extends StatelessWidget {
             value,
             style: TextStyle(
               fontSize: highlight ? 18 : 15,
-              color: const Color(0xFF6E5162),
+              color: highlight ? primary : textDark,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -263,7 +277,7 @@ class SelesaiPage extends StatelessWidget {
 
   static String _pesanApresiasi(int nilai) {
     if (nilai >= 90) {
-      return "Luar biasa. Kamu telah menyelesaikan ujian dengan hasil yang sangat baik. Terus pertahankan semangat belajarmu.";
+      return "Luar biasa. Kamu telah menyelesaikan ujian dengan hasil yang sangat baik. Terus pertahaman semangat belajarmu.";
     } else if (nilai >= 75) {
       return "Kerja bagus. Usahamu hari ini sangat berarti. Tetap semangat dan terus berkembang menjadi lebih baik.";
     } else if (nilai >= 60) {

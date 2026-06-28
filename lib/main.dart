@@ -28,7 +28,11 @@ class CBTApp extends StatelessWidget {
       title: 'CBT AN-NUR',
       theme: ThemeData(
         useMaterial3: true,
-        primarySwatch: Colors.pink,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF0D5C34),
+          primary: const Color(0xFF0D5C34),
+        ),
+        scaffoldBackgroundColor: const Color(0xFFF8F9FA),
       ),
       home: LoginPage(cameras: cameras),
     );
