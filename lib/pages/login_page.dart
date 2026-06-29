@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/images/cbt.jpeg',
+              'assets/images/cbt.png',
               fit: BoxFit.cover,
             ),
           ),
@@ -144,40 +144,46 @@ class _LoginPageState extends State<LoginPage> {
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20),
               child: Container(
-                width: 380,
-                padding: const EdgeInsets.all(26),
+                width: 360,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 35,
+                    ),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.92),
                   borderRadius: BorderRadius.circular(28),
                   border: Border.all(color: borderColor),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x1A0D5C34),
-                      blurRadius: 22,
-                      offset: Offset(0, 10),
-                    ),
-                  ],
+                  boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.08),
+                        blurRadius: 30,
+                        offset: const Offset(0, 15),
+                      ),
+                    ],
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(18),
-                      decoration: const BoxDecoration(
-                        color: primaryLight,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.lock_outline_rounded,
-                        size: 56,
-                        color: primary,
-                      ),
-                    ),
-                    const SizedBox(height: 18),
+                   Container(
+                          width: 200,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFEFF6F1),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Image.asset(
+                              'assets/images/logo_uin.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                    const SizedBox(height: 23),
                     const Text(
                       "LOGIN CBT",
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 20,
                         fontWeight: FontWeight.w800,
                         color: textDark,
                         letterSpacing: 0.5,
