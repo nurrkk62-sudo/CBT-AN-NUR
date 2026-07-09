@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'login_page.dart'; // Import halaman login
+import '../main.dart'; // Import main.dart untuk mengambil variabel global cameras
 
 class SelesaiPage extends StatelessWidget {
   final String nama;
@@ -202,7 +203,13 @@ class SelesaiPage extends StatelessWidget {
                             ),
                             child: ElevatedButton(
                               onPressed: () {
-                                SystemNavigator.pop();
+                                // Kembali ke halaman login dan menghapus seluruh tumpukan halaman sebelumnya
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginPage(cameras: cameras), // Membuka halaman login
+                                  ),
+                                  (route) => false, // Menghapus seluruh route sebelumnya agar tidak bisa di-back
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,

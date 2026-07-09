@@ -677,6 +677,34 @@ void didChangeAppLifecycleState(AppLifecycleState state) async {
     });
   }
 
+  // Fungsi helper untuk menampilkan dialog konfirmasi mengakhiri ujian
+  void _showExitConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Konfirmasi"), // Judul dialog
+          content: const Text("Apakah Anda yakin ingin mengakhiri ujian?"), // Pesan konfirmasi
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Menutup dialog pop-up konfirmasi
+              },
+              child: const Text("Tidak"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Menutup dialog pop-up konfirmasi
+                _finish(); // Panggil fungsi _finish untuk menyelesaikan ujian secara resmi
+              },
+              child: const Text("Ya"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void dispose() {
     FlutterWindowManagerPlus.clearFlags(
@@ -725,14 +753,16 @@ void didChangeAppLifecycleState(AppLifecycleState state) async {
     }
 
     return PopScope(
-  canPop: false,
-  onPopInvoked: (didPop) async {
-    if (didPop || _hasFinished) return;
-
-    _registerViolation("Menekan tombol kembali");
-    await _finish(autoSubmit: true);
-  },
-  child: ExamUI(
+      // Mencegah aplikasi langsung keluar saat tombol kembali ditekan
+      canPop: false,
+      // Dipanggil saat sistem mendeteksi tombol kembali ditekan
+      onPopInvokedWithResult: (didPop, result) async {
+        // Jika pop sudah ditangani atau ujian telah selesai, tidak perlu melakukan apa-apa
+        if (didPop || _hasFinished) return;
+        // Panggil dialog konfirmasi mengakhiri ujian
+        _showExitConfirmationDialog();
+      },
+      child: ExamUI(
     cam: _cam!,
     pelanggaran: pelanggaran,
     jawaban: jawabanList[currentIndex],
@@ -761,7 +791,12 @@ void didChangeAppLifecycleState(AppLifecycleState state) async {
       if (_hasFinished) return;
       jumpToSoal(idx);
     },
-    onFinish: () => _finish(),
+    onFinish: () {
+      // Jika ujian sudah selesai, batalkan aksi
+      if (_hasFinished) return;
+      // Panggil dialog konfirmasi mengakhiri ujian
+      _showExitConfirmationDialog();
+    },
   ),
 );
   }

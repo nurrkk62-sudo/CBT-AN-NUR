@@ -67,6 +67,7 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
 
       if (data is Map && data["status"] == "success") {
+        // Jika status success, arahkan pengguna ke halaman ujian
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -76,7 +77,23 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         );
+      } else if (data is Map && data["status"] == "sudah_ujian") {
+        // Jika status sudah_ujian, tampilkan pop-up dialog informasi
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("Akses Ditolak"), // Judul dialog pop-up
+            content: const Text("Akun ini sudah menyelesaikan ujian dan tidak bisa masuk lagi."), // Isi pesan dialog
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context), // Tombol OK untuk menutup dialog pop-up
+                child: const Text("OK"),
+              ),
+            ],
+          ),
+        );
       } else {
+        // Jika status lainnya (gagal), tampilkan pesan error menggunakan SnackBar
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(

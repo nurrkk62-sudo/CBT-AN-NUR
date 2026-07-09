@@ -515,64 +515,83 @@ class ExamUI extends StatelessWidget {
                           letterSpacing: 0.8,
                         ),
                       ),
-                      const SizedBox(height: 14),
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 5,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          childAspectRatio: 1.0,
+                      // Jarak vertikal kecil sebelum teks progres pengerjaan
+                      const SizedBox(height: 6),
+                      // Menampilkan progress pengerjaan soal: hitung jumlah jawaban yang terisi (bukan -1) dari total soal
+                      Text(
+                        "Progress Ujian: ${jawabanList.where((j) => j != -1).length} dari $totalSoal Soal Terisi",
+                        style: const TextStyle(
+                          fontSize: 13, // Ukuran teks progres
+                          fontWeight: FontWeight.bold, // Teks tebal agar mudah dibaca
+                          color: textDark, // Warna teks gelap sesuai tema
                         ),
-                        itemCount: totalSoal,
-                        itemBuilder: (context, index) {
-                          final isCurrent = (index == currentIndex);
-                          final isAnswered = (jawabanList[index] != -1);
+                      ),
+                      // Jarak sebelum masuk ke area kotak nomor soal
+                      const SizedBox(height: 14),
+                      // Membungkus GridView dengan SizedBox untuk membatasi tinggi maksimal area nomor soal
+                      SizedBox(
+                        height: 125, // Tinggi area navigasi dibatasi (sekitar 120-130) agar hemat layar
+                        child: GridView.builder(
+                          // Set shrinkWrap ke false karena ukuran tinggi sudah dibatasi oleh SizedBox
+                          shrinkWrap: false,
+                          // Mengaktifkan scroll independen dengan efek membal yang halus saat ditarik
+                          physics: const BouncingScrollPhysics(),
+                          // Menggunakan MaxCrossAxisExtent untuk ukuran kotak nomor yang lebih dinamis dan minimalis
+                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 50, // Ukuran lebar kotak maksimal 50 agar lebih minimalis
+                            crossAxisSpacing: 10, // Jarak mendatar antar kotak nomor
+                            mainAxisSpacing: 10, // Jarak tegak lurus antar kotak nomor
+                            childAspectRatio: 1.0, // Aspek rasio 1:1 agar bentuknya tetap persegi
+                          ),
+                          itemCount: totalSoal,
+                          itemBuilder: (context, index) {
+                            final isCurrent = (index == currentIndex);
+                            final isAnswered = (jawabanList[index] != -1);
 
-                          Color buttonBg;
-                          Color textCol;
-                          BorderSide borderSide;
+                            Color buttonBg;
+                            Color textCol;
+                            BorderSide borderSide;
 
-                          if (isCurrent) {
-                            buttonBg = primary;
-                            textCol = Colors.white;
-                            borderSide = BorderSide.none;
-                          } else if (isAnswered) {
-                            buttonBg = primaryLight;
-                            textCol = primary;
-                            borderSide = const BorderSide(color: primary, width: 1);
-                          } else {
-                            buttonBg = Colors.white;
-                            textCol = textSoft;
-                            borderSide = const BorderSide(color: borderColor, width: 1);
-                          }
+                            if (isCurrent) {
+                              buttonBg = primary;
+                              textCol = Colors.white;
+                              borderSide = BorderSide.none;
+                            } else if (isAnswered) {
+                              buttonBg = primaryLight;
+                              textCol = primary;
+                              borderSide = const BorderSide(color: primary, width: 1);
+                            } else {
+                              buttonBg = Colors.white;
+                              textCol = textSoft;
+                              borderSide = const BorderSide(color: borderColor, width: 1);
+                            }
 
-                          return Material(
-                            color: buttonBg,
-                            borderRadius: BorderRadius.circular(12),
-                            child: InkWell(
-                              onTap: () => onJumpToQuestion(index),
+                            return Material(
+                              color: buttonBg,
                               borderRadius: BorderRadius.circular(12),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.fromBorderSide(borderSide),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "${index + 1}",
-                                    style: TextStyle(
-                                      color: textCol,
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 15,
+                              child: InkWell(
+                                onTap: () => onJumpToQuestion(index),
+                                borderRadius: BorderRadius.circular(12),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.fromBorderSide(borderSide),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "${index + 1}",
+                                      style: TextStyle(
+                                        color: textCol,
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 15,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
