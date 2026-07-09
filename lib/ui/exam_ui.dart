@@ -81,30 +81,49 @@ class ExamUI extends StatelessWidget {
             height: 1.0,
           ),
         ),
-        title: const Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              "CBT AN-NUR",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w800,
-                color: primary,
-                letterSpacing: 0.5,
-              ),
+            title: Row(
+              children: [
+                Container(
+                  width: 46,
+                  height: 46,
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF1F7F2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Image.asset(
+                    'assets/images/logo_uin.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+
+                const SizedBox(width: 12),
+
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "CBT AN-NUR",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: primary,
+                      ),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      "SISTEM UJIAN ONLINE UIN",
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: textSoft,
+                        letterSpacing: 0.8,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            SizedBox(height: 2),
-            Text(
-              "SISTEM UJIAN ONLINE UIN",
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
-                color: textSoft,
-                letterSpacing: 0.8,
-              ),
-            ),
-          ],
-        ),
       ),
       body: Stack(
         children: [
@@ -516,63 +535,68 @@ class ExamUI extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 14),
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 5,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          childAspectRatio: 1.0,
-                        ),
-                        itemCount: totalSoal,
-                        itemBuilder: (context, index) {
-                          final isCurrent = (index == currentIndex);
-                          final isAnswered = (jawabanList[index] != -1);
+                      SizedBox(
+                        height: 220, // Tinggi area navigasi, bisa diubah menjadi 250 atau 300
+                        child: Scrollbar(
+                          thumbVisibility: true,
+                          child: GridView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 5,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              childAspectRatio: 1.5,
+                            ),
+                            itemCount: totalSoal,
+                            itemBuilder: (context, index) {
+                              final isCurrent = (index == currentIndex);
+                              final isAnswered = (jawabanList[index] != -1);
 
-                          Color buttonBg;
-                          Color textCol;
-                          BorderSide borderSide;
+                              Color buttonBg;
+                              Color textCol;
+                              BorderSide borderSide;
 
-                          if (isCurrent) {
-                            buttonBg = primary;
-                            textCol = Colors.white;
-                            borderSide = BorderSide.none;
-                          } else if (isAnswered) {
-                            buttonBg = primaryLight;
-                            textCol = primary;
-                            borderSide = const BorderSide(color: primary, width: 1);
-                          } else {
-                            buttonBg = Colors.white;
-                            textCol = textSoft;
-                            borderSide = const BorderSide(color: borderColor, width: 1);
-                          }
+                              if (isCurrent) {
+                                buttonBg = primary;
+                                textCol = Colors.white;
+                                borderSide = BorderSide.none;
+                              } else if (isAnswered) {
+                                buttonBg = primaryLight;
+                                textCol = primary;
+                                borderSide = const BorderSide(color: primary, width: 1);
+                              } else {
+                                buttonBg = Colors.white;
+                                textCol = textSoft;
+                                borderSide = const BorderSide(color: borderColor, width: 1);
+                              }
 
-                          return Material(
-                            color: buttonBg,
-                            borderRadius: BorderRadius.circular(12),
-                            child: InkWell(
-                              onTap: () => onJumpToQuestion(index),
-                              borderRadius: BorderRadius.circular(12),
-                              child: Container(
-                                decoration: BoxDecoration(
+                              return Material(
+                                color: buttonBg,
+                                borderRadius: BorderRadius.circular(12),
+                                child: InkWell(
+                                  onTap: () => onJumpToQuestion(index),
                                   borderRadius: BorderRadius.circular(12),
-                                  border: Border.fromBorderSide(borderSide),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "${index + 1}",
-                                    style: TextStyle(
-                                      color: textCol,
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 15,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.fromBorderSide(borderSide),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "${index + 1}",
+                                        style: TextStyle(
+                                          color: textCol,
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 15,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          );
-                        },
+                              );
+                            },
+                          ),
+                        ),
                       ),
                     ],
                   ),

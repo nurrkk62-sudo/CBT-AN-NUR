@@ -165,31 +165,31 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                    Container(
-                          width: 200,
-                          height: 200,
+                          width: 150,
+                          height: 100,
                           decoration: BoxDecoration(
                             color: const Color(0xFFEFF6F1),
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(8),
                             child: Image.asset(
                               'assets/images/logo_uin.png',
                               fit: BoxFit.contain,
                             ),
                           ),
                         ),
-                    const SizedBox(height: 23),
+                    const SizedBox(height: 20),
                     const Text(
                       "LOGIN CBT",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w800,
-                        color: textDark,
+                        color: Color.fromARGB(255, 16, 74, 40),
                         letterSpacing: 0.5,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 5),
                     const Text(
                       "Silakan masuk untuk memulai ujian",
                       textAlign: TextAlign.center,
